@@ -1,5 +1,7 @@
+// importaion des modules que ce composant utilise
 import React,{Component} from 'react' 
 import formatCurrency from "../util";
+import Fade from "react-reveal/Fade";
 export default class Cart extends Component {
     constructor(props){
         super(props);
@@ -41,6 +43,8 @@ export default class Cart extends Component {
               <div>
                   {/* ici on affiche l'element ajoute dans le panier avec son image et un bouton Remove pour supprimer chaque element */}
                <div className="cart">
+                   {/* on met le contenu de la liste du panier dans fade pour gerer l'animation */}
+                <Fade left cascade>
                  <ul className="cart-items">
                     {cartItems.map(item =>(
                         <li key={item._id}>
@@ -62,6 +66,7 @@ export default class Cart extends Component {
                         </li>
                     ))}
                 </ul>  
+                </Fade>
                </div>
                {cartItems.length!==0 &&(
                    <div>
@@ -79,6 +84,7 @@ export default class Cart extends Component {
 
                </div>
                {this.state.showCheckout && (
+                   <Fade right cascade>
                    <div className="cart">
                     <form onSubmit={this.createOrder}>
                         <ul className="form-container">
@@ -100,6 +106,7 @@ export default class Cart extends Component {
                         </ul>
                     </form>
                     </div>
+                    </Fade> 
                )}
                
                

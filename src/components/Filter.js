@@ -1,3 +1,4 @@
+// importaion des modules que ce composant utilise
 import React,{Component} from 'react' 
 
 export default class Filter extends Component {
