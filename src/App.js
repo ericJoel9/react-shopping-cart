@@ -10,10 +10,16 @@ class App extends React.Component {
     super();
     this.state={
       products:data.products,
-      cartItems:[],
+      // si l'element existe dans le panier alors le sauvegarder apres actualisation de la page
+      cartItems:localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[],
       size:"",
       sort:"",
     };
+  }
+  // Toutes les fonctions sont impléméntées dans cette page 
+ //tous le css du projet est gerer dans une page appelé index.css
+  createOrder=(order)=>{
+    alert("Need to save order for "+ order.name);
   }
   //funcion removeFromCart
   removeFromCart=(product)=>{
@@ -21,7 +27,8 @@ class App extends React.Component {
     this.setState({
      cartItems: cartItems.filter(x=>x._id !== product._id)
     });
-  
+    // permet de sauvegarder ce qui se trouve dans le panier après actualisation de la page
+    localStorage.setItem("cartItems",JSON.stringify(cartItems.filter(x=>x._id !== product._id)));
   };
   //function addToCart
   addToCart=(product)=>{
@@ -37,7 +44,8 @@ class App extends React.Component {
         cartItems.push({ ...product, count: 1});
       }
       this.setState({cartItems});//mis à jour du panier
-    
+      // permet de sauvegarder ce qui se trouve dans le panier après actualisation de la page
+      localStorage.setItem("cartItems",JSON.stringify(cartItems));
   };
   sortProducts =(event)=>{
    //fonction qui classe les produits en fonction des prix
@@ -69,7 +77,9 @@ class App extends React.Component {
       });
    }
   }
-    
+    // page principale de l'application qui retourne un type html que l'on divise en fonction de ce qu'on veut obtenir
+    //ici  on a 3 partie principales:header ,main ,footer
+    // dans le main on a 3 sous div qui appartiennet aux differentes composants creer(product,filter,cart)
   render(){
     return (
       <div className = "grid-container">
@@ -79,6 +89,7 @@ class App extends React.Component {
         <main>
           <div className="content">
             <div className="main">
+              {/* composant Filter.Js et ses fonctions qu'il utilise  */}
               <Filter
               count={this.state.products.length}
               size ={this.state.size}
@@ -87,6 +98,7 @@ class App extends React.Component {
               sortProducts={this.sortProducts}
               >
               </Filter>
+              {/* composant product.js et ses fonctions qu'il utilise */}
                <Products
                 products={this.state.products}
                  addToCart={this.addToCart}>
@@ -94,9 +106,12 @@ class App extends React.Component {
                 </Products>
             </div>
             <div className="sidebar">
-                <Cart cartItems={this.state.cartItems} 
-                removeFromCart={this.removeFromCart
-            }/>
+              {/* on passe ces fonctions comme composant de cart pour eviter l'erreur lors de l'appel de ces fonctions par l'utilisateur */}
+                <Cart 
+                cartItems={this.state.cartItems} 
+                removeFromCart={this.removeFromCart}
+                  createOrder={this.createOrder}
+            />
             </div>
           </div>
         </main>
