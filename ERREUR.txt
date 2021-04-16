@@ -1,1 +1,5 @@
 SKIP_PREFLIGHT_CHECK=true
+
+pour les animations installer le module
+npm install react-reveal
+si lors de l'installation d'un module il y'a erreurs de depence lancerla commande d'installation suivie de --force

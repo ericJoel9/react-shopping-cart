@@ -1,4 +1,5 @@
 //feature 1
+//importation des composants
 import React from "react";
 import Cart from "./components/Cart";
 import Filter from "./components/Filter";
