@@ -1,6 +1,7 @@
 import React,{Component} from 'react' 
 import formatCurrency from "../util";
 export default class Products extends Component {
+     // ici on implemente ce qu'on veut que le composant product retourne
     render(){
         return(
             <div>

@@ -1,6 +1,7 @@
 import React,{Component} from 'react' 
 
 export default class Filter extends Component {
+     // ici on implemente ce qu'on veut que le composant filter retourne
     render(){
         return(
             <div className="filter">
